@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+!pip install -r requirements.txt
 import pandas as pd
 import urllib.request
 import sys
