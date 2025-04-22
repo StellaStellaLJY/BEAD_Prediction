@@ -32,4 +32,4 @@ def predict_route():
 
 # 主程序入口（仅本地测试时用，Azure 会自动调用）
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=8000)
