@@ -4,7 +4,7 @@
 # app.py
 !pip install -r requirements.txt
 from flask import Flask, request, jsonify
-from bead_prediction import predict  # 导入预测函数
+from bead_prediction import process_and_predict, fetch_weather_data, prepare_data  # 导入预测函数
 
 # 初始化 Flask 应用
 app = Flask(__name__)
@@ -22,7 +22,7 @@ def predict_route():
         data = request.get_json()
 
         # 调用 bead_prediction 中的预测函数
-        predictions = predict(data)
+        predictions = process_and_predict(data)
         
         # 返回预测结果
         return jsonify({"predictions": predictions})
