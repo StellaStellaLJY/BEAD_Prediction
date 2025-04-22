@@ -106,7 +106,7 @@ import joblib
 import pandas as pd
 
 # 加载模型
-model = joblib.load("xgb_model_CV_4.0.pkl")
+model = joblib.load("xgb_model_CV_3.0.pkl")
 
 
 # 模型预测并取整
