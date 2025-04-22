@@ -1,4 +1,5 @@
 Flask==2.1.1
+gunicorn
 numpy
 pandas
 xgboost==1.4.2
