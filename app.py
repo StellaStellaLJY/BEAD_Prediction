@@ -10,18 +10,38 @@ Original file is located at
 from flask import Flask, request, jsonify
 import joblib
 import pandas as pd
+import numpy as np
 
+# 初始化 Flask 应用
 app = Flask(__name__)
 
 # 加载模型
-model = joblib.load("linear_model.pkl")
+model = joblib.load("xgb_model_CV_4.0.pkl")
 
+# 根路径，测试用
+@app.route('/')
+def home():
+    return "🎉 Flask API is running!"
+
+# 预测接口
 @app.route('/predict', methods=['POST'])
 def predict():
-    data = request.json
-    df = pd.DataFrame(data)
-    prediction = model.predict(df)
-    return jsonify({'prediction': prediction.tolist()})
+    try:
+        # 获取 JSON 数据
+        data = request.get_json()
+        
+        # 转成 DataFrame
+        input_df = pd.DataFrame(data)
+        
+        # 模型预测
+        predictions = model.predict(input_df)
+        
+        # 返回预测结果
+        return jsonify({"predictions": predictions.tolist()})
+    
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
 
+# 主程序入口（仅本地测试时用，Azure 会自动调用）
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=5000)
