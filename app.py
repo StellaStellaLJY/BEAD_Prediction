@@ -2,7 +2,7 @@
 
 
 # app.py
-
+!pip install -r requirements.txt
 from flask import Flask, request, jsonify
 from bead_prediction import predict  # 导入预测函数
 
