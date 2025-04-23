@@ -2,7 +2,6 @@
 
 
 # app.py
-!pip install -r requirements.txt
 from flask import Flask, request, jsonify
 from bead_prediction import process_and_predict, fetch_weather_data, prepare_data  # 导入预测函数
 
