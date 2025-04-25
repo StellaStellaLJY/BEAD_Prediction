@@ -41,15 +41,13 @@ jobs:
           name: python-app
 
       - name: Unzip artifact for deployment
-        run: unzip -o release.zip
-        
-      - name: Check contents after unzip
         run: |
-          unzip -l release.zip
+          mkdir output
+          unzip release.zip -d output
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'bead-divvy'
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}  # 使用 Publish Profile
-          package: release.zip
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: output
