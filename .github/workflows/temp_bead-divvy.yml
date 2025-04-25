@@ -25,7 +25,7 @@ jobs:
       - name: Zip deployment package
         run: |
           mkdir package
-          cp app.py bead_prediction.py requirements.txt xgb_model_CV_3.0.pkl station_mapping.csv package/
+          cp app.py bead_prediction.py requirements.txt xgb_model_CV_3.0.json station_mapping.csv package/
           cd package
           zip -r ../release.zip .
 
