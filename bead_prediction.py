@@ -4,9 +4,10 @@ import urllib.request
 import sys
 import json
 import joblib
+from xgboost import Booster
 
-# 加载模型
-model = joblib.load("xgb_model_CV_3.0.pkl")
+model = Booster()
+model.load_model("xgb_model.json")
 
 # 读取站点映射
 station_mapping = pd.read_csv("station_mapping.csv")
