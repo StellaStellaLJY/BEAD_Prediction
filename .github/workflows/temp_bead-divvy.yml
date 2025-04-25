@@ -42,6 +42,10 @@ jobs:
 
       - name: Unzip artifact for deployment
         run: unzip -o release.zip
+        
+      - name: Check contents after unzip
+        run: |
+          unzip -l release.zip
 
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
