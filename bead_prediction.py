@@ -7,7 +7,7 @@ import joblib
 from xgboost import Booster
 
 model = Booster()
-model.load_model("xgb_model.json")
+model.load_model("xgb_model_CV_3.0.json")
 
 # 读取站点映射
 station_mapping = pd.read_csv("station_mapping.csv")
