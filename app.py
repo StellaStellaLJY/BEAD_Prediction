@@ -13,19 +13,6 @@ app = Flask(__name__)
 def home():
     return "🎉 Flask API is running!"
 
-# 预测接口
-@app.route('/predict', methods=['POST'])
-def predict_route():
-    try:
-        # 获取 JSON 数据
-        data = request.get_json()
-
-        # 调用 bead_prediction 中的预测函数
-        predictions = process_and_predict(data)
-        
-        # 返回预测结果
-        return jsonify({"predictions": predictions})
-
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
