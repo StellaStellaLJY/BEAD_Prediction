@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "🎉 Minimal Flask API is working!"
+    return "🎉 Flask API is working!"
 
 import os
 
