@@ -11,14 +11,14 @@ def home():
 @app.route('/predict', methods=['POST'])
 def predict_route():
     try:
-        # 获取 JSON 数据
-        data = request.get_json()
-
-        # 调用 bead_prediction 中的预测函数
-        predictions = process_and_predict(data)
+        # 直接调用 process_and_predict，不需要从请求中获取数据
+        predictions = process_and_predict(None)  # 没有传递数据，只需要调用函数
+        
+        # 将 DataFrame 转换为 JSON 格式（可以根据需求进一步调整数据结构）
+        predictions_json = predictions.to_dict(orient='records')  # 将 DataFrame 转换为列表的字典
         
         # 返回预测结果
-        return jsonify({"predictions": predictions})
+        return jsonify({"predictions": predictions_json})
 
     except Exception as e:
         return jsonify({"error": str(e)}), 400
