@@ -6,6 +6,10 @@ on:
       - temp
   workflow_dispatch:
 
+permissions:  # ✅ 顶层设置权限，确保 Azure 登录成功
+  id-token: write
+  contents: read
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
