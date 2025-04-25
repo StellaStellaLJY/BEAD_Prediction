@@ -45,6 +45,10 @@ jobs:
           mkdir output
           unzip release.zip -d output
 
+      - name: Extract .tar.gz file
+        run: |
+          tar -xzvf output.tar.gz -C /home/site/wwwroot
+
       - name: Deploy to Azure Web App
         uses: azure/webapps-deploy@v3
         with:
