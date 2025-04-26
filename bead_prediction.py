@@ -100,12 +100,16 @@ def process_and_predict():
     timestamps = X['timestamp']
     X_no_timestamp = X.drop(columns=['timestamp'])
     X_no_timestamp = X_no_timestamp.select_dtypes(include=["number"])
-
+    
+    # ✅ 转成DMatrix
+    dmatrix_data = xgb.DMatrix(X_no_timestamp)
+    
     # 模型预测
-    X['predicted_inventory_change'] = model.predict(X_no_timestamp).round().astype(int)
-
+    X['predicted_inventory_change'] = model.predict(dmatrix_data).round().astype(int)
+    
     # 还原时间戳
     X['timestamp'] = timestamps
+
 
     # 返回最终结果
     result = X[[
