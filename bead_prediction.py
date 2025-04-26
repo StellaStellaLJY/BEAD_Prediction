@@ -21,12 +21,10 @@ def fetch_weather_data():
 
     except urllib.error.HTTPError as e:
         ErrorInfo = e.read().decode()
-        print('Error code: ', e.code, ErrorInfo)
-        sys.exit()
+        raise Exception(f'HTTPError: {e.code}, {ErrorInfo}')
     except urllib.error.URLError as e:
-        ErrorInfo = e.read().decode()
-        print('Error code: ', e.code, ErrorInfo)
-        sys.exit()
+        raise Exception(f'URLError: {str(e)}')
+
 
 def prepare_data(jsonData):
     # 提取小时数据
