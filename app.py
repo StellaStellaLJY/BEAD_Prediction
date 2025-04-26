@@ -8,15 +8,19 @@ def home():
     return "🎉 Flask API is working!"
     
 # 预测接口
-@app.route('/predict', methods=['GET', 'POST'])  # 支持GET和POST
+@app.route('/predict', methods=['GET', 'POST'])
 def predict_route():
     try:
+        # 加一行测试：看看是不是GET请求
+        if request.method == 'GET':
+            return jsonify({"message": "GET request received successfully!"})
+        
         predictions = process_and_predict()
         predictions_json = predictions.to_dict(orient='records')
-        return jsonify(predictions_json)  # 直接返回列表，不要包一层 
-
+        return jsonify(predictions_json)
     except Exception as e:
         return jsonify({"error": str(e)}), 400
+
         
 import os
 
