@@ -8,17 +8,12 @@ def home():
     return "🎉 Flask API is working!"
     
 # 预测接口
-@app.route('/predict', methods=['POST'])
+@app.route('/predict', methods=['GET', 'POST'])  # 支持GET和POST
 def predict_route():
     try:
-        # 直接调用 process_and_predict，不需要从请求中获取数据
-        predictions = process_and_predict()  # 没有传递数据，只需要调用函数
-        
-        # 将 DataFrame 转换为 JSON 格式（可以根据需求进一步调整数据结构）
-        predictions_json = predictions.to_dict(orient='records')  # 将 DataFrame 转换为列表的字典
-        
-        # 返回预测结果
-        return jsonify({"predictions": predictions_json})
+        predictions = process_and_predict()
+        predictions_json = predictions.to_dict(orient='records')
+        return jsonify(predictions_json)  # 直接返回列表，不要包一层 
 
     except Exception as e:
         return jsonify({"error": str(e)}), 400
