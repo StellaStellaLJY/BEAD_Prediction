@@ -62,7 +62,7 @@ def prepare_data(jsonData):
 
     return final_df
 
-def process_and_predict(input_data):
+def process_and_predict():
 
     model = Booster()
     model.load_model("xgb_model_CV_3.0.json")
