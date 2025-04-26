@@ -52,11 +52,13 @@ def prepare_data(jsonData):
     df["precip_snow"] = df["preciptype"].apply(lambda x: 1 if x == "snow" else 0)
 
     # 选择需要的列
-    final_df = df[[
+    final_df = df[[ 
+        "timestamp", 
         "temp", "precip", "windspeed", "uvindex", "icon",
         "year", "month", "day_of_week", "hour", "is_weekend",
         "year_month", "time_index", "precip_rain", "precip_snow"
     ]]
+
 
     return final_df
 
