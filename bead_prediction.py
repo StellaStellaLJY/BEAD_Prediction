@@ -6,11 +6,7 @@ import json
 import joblib
 from xgboost import Booster
 
-model = Booster()
-model.load_model("xgb_model_CV_3.0.json")
 
-# 读取站点映射
-station_mapping = pd.read_csv("station_mapping.csv")
 
 def fetch_weather_data():
     try:
@@ -67,6 +63,13 @@ def prepare_data(jsonData):
     return final_df
 
 def process_and_predict(input_data):
+
+    model = Booster()
+    model.load_model("xgb_model_CV_3.0.json")
+    
+    # 读取站点映射
+    station_mapping = pd.read_csv("station_mapping.csv")
+
     # 获取天气数据
     jsonData = fetch_weather_data()
 
