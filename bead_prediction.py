@@ -5,7 +5,7 @@ import sys
 import json
 import joblib
 from xgboost import Booster
-
+import xgboost as xgb
 
 
 def fetch_weather_data():
