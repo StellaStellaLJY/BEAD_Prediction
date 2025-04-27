@@ -63,7 +63,6 @@ def prepare_data(jsonData):
     return final_df
 
 def process_and_predict():
-
     model = Booster()
     model.load_model("xgb_model_CV_3.0.json")
     
@@ -96,28 +95,31 @@ def process_and_predict():
     ]
     X = X[desired_cols]
 
-    # 删除时间戳列并确保是数值数据
+    # 保存时间戳
     timestamps = X['timestamp']
     X_no_timestamp = X.drop(columns=['timestamp'])
     X_no_timestamp = X_no_timestamp.select_dtypes(include=["number"])
-    
-    # ✅ 转成DMatrix
+
+    # 预测
     dmatrix_data = xgb.DMatrix(X_no_timestamp)
-    
-    # 模型预测
     X['predicted_inventory_change'] = model.predict(dmatrix_data).round().astype(int)
-    
-    # 还原时间戳
-    X['timestamp'] = timestamps
 
+    # 加回 station_name
+    final_result = pd.merge(
+        X, 
+        station_mapping[['lat', 'lng', 'station_name']], 
+        on=['lat', 'lng'], 
+        how='left'
+    )
 
-    # 返回最终结果
-    result = X[[
-        'timestamp', 'lat', 'lng', 'temp', 'precip',
+    # 把列顺序整理一下
+    final_result = final_result[[
+        'timestamp', 'station_name', 'lat', 'lng', 'temp', 'precip',
         'windspeed', 'uvindex', 'icon', 'year', 'month', 'day_of_week',
         'hour', 'is_weekend', 'year_month', 'time_index',
         'precip_rain', 'precip_snow', 'predicted_inventory_change'
     ]]
 
-    return result
+    return final_result
+
 
